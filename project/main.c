@@ -1,10 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <locale.h>
-#include "queijos.h"
-#include "vinhos.h"
 #include "global.h"
+#include "queijos.c"
+#include "vinhos.c"
 
 int main() {
     setlocale(LC_ALL, "Portuguese");
@@ -12,7 +8,7 @@ int main() {
         while (running >= 1) {
             int selector1, opcao;
 
-            cleanTerminal();
+            system("cls");
 
             printf("Bem vindo ao sistema de cadastro de queijos e vinhos!\n\n\n");
 
@@ -24,13 +20,13 @@ int main() {
             printf("0 - Sair\n\n");
             printf("Selecione a opção desejada: ");
             scanf("%i", &selector1);
-            cleanTerminal();
+            system("cls");
 
 
             switch (selector1)
             {
             case 1:
-                opcao = queijoOuVinho();
+                opcao = generalSelector();
                 if (opcao == 1) {
                     cadastrarQueijos();
                 } else if (opcao == 2) {
@@ -39,7 +35,7 @@ int main() {
                 break;
 
             case 2:
-                opcao = queijoOuVinho();
+                opcao = generalSelector();
                 if (opcao == 1) {
                     consultarQueijos();
                 } else if (opcao == 2) {
@@ -48,7 +44,7 @@ int main() {
                 break;
 
             case 3:
-                opcao = queijoOuVinho();
+                opcao = generalSelector();
                 if (opcao == 1) {
                     editarQueijos();
                 } else if (opcao == 2) {
@@ -57,7 +53,7 @@ int main() {
                 break;
 
             case 4:
-                opcao = queijoOuVinho();
+                opcao = generalSelector();
                 if (opcao == 1) {
                     deletarQueijos();
                 } else if (opcao == 2) {
@@ -73,6 +69,6 @@ int main() {
             default:
                 printf("Opção Inválida!");
                 break;
-            }
+            } //End Switch
     }
 }

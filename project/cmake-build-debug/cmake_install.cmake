@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/Samuel/Desktop/Projeto_Sistema_Queijos_e_Vinhos
+# Install script for directory: C:/Users/Samuel/Desktop/Projeto_Sistema_Queijos_e_Vinhos/project
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/Samuel/Desktop/Projeto_Sistema_Queijos_e_Vinhos/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/Samuel/Desktop/Projeto_Sistema_Queijos_e_Vinhos/project/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

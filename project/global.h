@@ -10,22 +10,28 @@
 
 #define MAX_LENGTH 50
 
+typedef struct {
+    int lot;
+    char production[MAX_LENGTH];
+    char type[MAX_LENGTH];
+    int amount;
+    int day;
+    int month;
+    int year;
+} productStruct;
 
-
-//GLOBAL FUNCTIONS
-
-//Função de seleção entre queijos e vinhos
+//Seletor padrão de queijos ou vinhos
 int generalSelector () {
-    int selector2;
+    int subSelector;
     printf("-------------- MENU --------------\n");
     printf("1 - Lotes de Queijos\n");
     printf("2 - Garrafas de Vinhos\n");
     printf("0 - Voltar\n");
     printf("Selecione o que deseja: ");
-    scanf("%i", &selector2);
+    scanf("%d", &subSelector); //NOLINT(cert-err34-c) <- remove o aviso do "scanf"
     printf("\n");
 
-    switch (selector2)
+    switch (subSelector)
     {
         case 1:
             return 1;
@@ -39,9 +45,10 @@ int generalSelector () {
             break;
 
         default:
+            printf("Opção inválida!");
             break;
     }
+    return 0;
 }
-
 
 #endif // GLOBAL_H

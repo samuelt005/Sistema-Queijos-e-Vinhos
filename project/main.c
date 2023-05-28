@@ -1,12 +1,11 @@
 #include "global.h"
-#include "queijos.c"
-#include "vinhos.c"
+#include "functions.c"
 
 int main() {
     setlocale(LC_ALL, "Portuguese");
     int running = 1;
-        while (running >= 1) {
-            int selector1, opcao;
+        while (running == 1) {
+            int selector, option;
 
             system("cls");
 
@@ -15,59 +14,40 @@ int main() {
             printf("-------------- MENU --------------\n");
             printf("1 - Cadastrar\n");
             printf("2 - Consultar\n");
-            printf("3 - Editar\n");
-            printf("4 - Deletar\n");
             printf("0 - Sair\n\n");
             printf("Selecione a opção desejada: ");
-            scanf("%i", &selector1);
+            scanf("%d", &selector); //NOLINT(cert-err34-c) <- remove o aviso do "scanf"
             system("cls");
 
 
-            switch (selector1)
+            switch (selector)
             {
             case 1:
-                opcao = generalSelector();
-                if (opcao == 1) {
-                    cadastrarQueijos();
-                } else if (opcao == 2) {
-                    cadastrarVinhos();
-                };
+                option = generalSelector();
+                if (option == 1) {
+                    registerProduct(1);
+                } else if (option == 2) {
+                    registerProduct(2);
+                }
                 break;
 
             case 2:
-                opcao = generalSelector();
-                if (opcao == 1) {
-                    consultarQueijos();
-                } else if (opcao == 2) {
-                    consultarVinhos();
-                };
-                break;
-
-            case 3:
-                opcao = generalSelector();
-                if (opcao == 1) {
-                    editarQueijos();
-                } else if (opcao == 2) {
-                    editarVinhos();
-                };
-                break;
-
-            case 4:
-                opcao = generalSelector();
-                if (opcao == 1) {
-                    deletarQueijos();
-                } else if (opcao == 2) {
-                    deletarVinhos();
-                };
+                option = generalSelector();
+                if (option == 1) {
+                    listProduct(1);
+                } else if (option == 2) {
+                    listProduct(2);
+                }
                 break;
 
             case 0:
                 printf("Saindo... volte sempre! :)\n");
                 sleep(2);
-                return running = 0;
+                running = 0;
+                break;
 
             default:
-                printf("Opção Inválida!");
+                printf("Opção inválida!");
                 break;
             } //End Switch
     }

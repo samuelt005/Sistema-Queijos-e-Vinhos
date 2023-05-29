@@ -25,6 +25,8 @@ void registerProduct (int productType) {
     newProduct.month = localTime->tm_mon + 1; // Os meses são indexados a partir de zero
     newProduct.year = localTime->tm_year + 1900; // Adiciona 1900 ao valor do ano
 
+
+
     // Registrar produto no arquivo data1.bin
     if (productType == 1) {
         FILE* file = fopen("data1.bin", "ab"); //Abre o arquivo
@@ -64,14 +66,25 @@ void listProduct (int productType) {
         }
     }
 
+    //Impressão dos produtos
+    printf("Lote:\tData de produção:\tTipo:\t\tQuantidade:\tData de cadastro:\n");
     productStruct product;
     while (fread(&product, sizeof(product), 1, file) == 1) {
-        printf("Lote: %d\n", product.lot);
-        printf("Data de produção: %s\n", product.production);
-        printf("Tipo: %s\n", product.type);
-        printf("Quantidade: %d\n", product.amount);
-        printf("-----------------------------\n");
+        printf("%d\t"
+               "%s\t\t"
+               "%s\t\t"
+               "%d\t\t"
+               "%d/%d/%d\n",
+               product.lot,
+               product.production,
+               product.type,
+               product.amount,
+               product.day,
+               product.month,
+               product.year);
     }
+
+    sleep(10);
 
     fclose(file);
 

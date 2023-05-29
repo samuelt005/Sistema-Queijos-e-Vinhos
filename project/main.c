@@ -9,7 +9,7 @@ int main() {
 
             system("cls");
 
-            printf("Bem vindo ao sistema de cadastro de queijos e vinhos!\n\n\n");
+            printf("Bem vindo ao sistema de cadastro de queijos e vinhos!\n\n");
 
             printf("-------------- MENU --------------\n");
             printf("1 - Cadastrar\n");

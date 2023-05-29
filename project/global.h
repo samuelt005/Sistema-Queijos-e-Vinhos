@@ -34,9 +34,11 @@ int generalSelector () {
     switch (subSelector)
     {
         case 1:
+            system("cls");
             return 1;
 
         case 2:
+            system("cls");
             return 2;
 
         case 0:

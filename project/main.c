@@ -22,6 +22,7 @@ int main() {
 
             switch (selector)
             {
+            //Case para cadastrar produtos
             case 1:
                 option = generalSelector();
                 if (option == 1) {
@@ -31,6 +32,7 @@ int main() {
                 }
                 break;
 
+            //Case para listar os produtos
             case 2:
                 option = generalSelector();
                 if (option == 1) {
@@ -48,6 +50,7 @@ int main() {
 
             default:
                 printf("Opção inválida!");
+                sleep(2);
                 break;
             } //End Switch
     }

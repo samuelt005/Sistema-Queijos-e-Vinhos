@@ -80,7 +80,7 @@ void editProduct(int productType) {
         printf("2 - Data de produção\n");
         printf("3 - Tipo\n");
         printf("4 - Quantidade\n");
-        printf("0 - Cancelar\n\n");
+        printf("0 - Cancelar\n");
         printf("Digite o que deseja editar: ");
         scanf("%d", &dataToEdit); //NOLINT(cert-err34-c) <- remove o aviso do "scanf"
 

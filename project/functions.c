@@ -131,6 +131,37 @@ void editProduct(int productType) {
     }
 }
 
+int checkDuplicateLot(int productType, int lotToCheck) {
+    FILE* file;
+    char filename[20];
+
+    if (productType == 1) {
+        strcpy(filename, "data1.bin");
+    } else if (productType == 2) {
+        strcpy(filename, "data2.bin");
+    }
+
+    file = fopen(filename, "rb"); // Abrir o arquivo em modo de leitura
+
+    if (file == NULL) {
+        printf("Arquivo não encontrado!\n");
+        sleep(2);
+        return 0;
+    }
+
+    productStruct product;
+
+    while (fread(&product, sizeof(product), 1, file) == 1) {
+        if (product.lot == lotToCheck) {
+            fclose(file);
+            return 1; // O número de lote já existe, é um lote duplicado
+        }
+    }
+
+    fclose(file);
+    return 0; // O número de lote não existe, não é um lote duplicado
+}
+
 void registerProduct (int productType) {
 
     productStruct newProduct;
@@ -139,14 +170,21 @@ void registerProduct (int productType) {
     //Inserção de dados pelo usuário
     printf("Digite o número do lote: ");
     scanf("%d", &newProduct.lot); //NOLINT(cert-err34-c) <- remove o aviso do "scanf"
-    //TODO Verificador de lotes duplicados
-    printf("Digite a data de produção: ");
+
+    //Verificar se o número de lote já existe
+    //Se o número do lote já existe ele vai voltar e não irá registrar nada
+    if (checkDuplicateLot(productType, newProduct.lot)) {
+        printf("Número do lote já existe!\n");
+        sleep(2);
+        return;
+    }
+
+    printf("Digite a data de produção no formato dd/mm/aaaa: ");
     scanf("%s", newProduct.production);
     printf("Digite o tipo do produto: ");
     scanf("%s", newProduct.type);
     printf("Digite a quantidade: ");
     scanf("%d", &newProduct.amount); //NOLINT(cert-err34-c) <- remove o aviso do "scanf"
-
 
     //Obtém a data e hora atual do sistema
     time_t currentTime;
@@ -156,8 +194,6 @@ void registerProduct (int productType) {
     newProduct.day = localTime->tm_mday;
     newProduct.month = localTime->tm_mon + 1; // Os meses são indexados a partir de zero
     newProduct.year = localTime->tm_year + 1900; // Adiciona 1900 ao valor do ano
-
-
 
     // Registrar produto no arquivo data1.bin
     if (productType == 1) {
@@ -177,6 +213,32 @@ void registerProduct (int productType) {
         printf("Lote de vinhos cadastrado com sucesso!\n");
     }
 
+}
+
+void calculateElapsedTime(productStruct product) {
+    time_t currentTime;
+    time(&currentTime);
+    struct tm* localTime = localtime(&currentTime);
+
+    int currentDay = localTime->tm_mday;
+    int currentMonth = localTime->tm_mon + 1;
+    int currentYear = localTime->tm_year + 1900;
+
+    int elapsedYears = currentYear - product.year;
+    int elapsedMonths = currentMonth - product.month;
+    int elapsedDays = currentDay - product.day;
+
+    if (elapsedDays < 0) {
+        elapsedMonths--;
+        elapsedDays += 30; // Considerando cada mês com 30 dias
+    }
+
+    if (elapsedMonths < 0) {
+        elapsedYears--;
+        elapsedMonths += 12;
+    }
+
+    printf("%d anos, %d meses, %d dias\n", elapsedYears, elapsedMonths, elapsedDays);
 }
 
 void listProduct (int productType) {
@@ -201,14 +263,14 @@ void listProduct (int productType) {
     }
 
     //Impressão dos produtos
-    printf("Lote:\tData de produção:\tTipo:\t\tQuantidade:\tData de cadastro:\n");
+    printf("Lote:\tData de produção:\tTipo:\t\tQuantidade:\tData de cadastro:\tTempo desde o cadastro:\n");
     productStruct product;
     while (fread(&product, sizeof(product), 1, file) == 1) {
         printf("%d\t"
                "%s\t\t"
                "%s\t\t"
                "%d\t\t"
-               "%d/%d/%d\n",
+               "%d/%d/%d\t\t",
                product.lot,
                product.production,
                product.type,
@@ -216,7 +278,7 @@ void listProduct (int productType) {
                product.day,
                product.month,
                product.year);
-               //TODO Imprimir tempo desde o cadastro do produto
+               calculateElapsedTime(product);
     }
 
     fclose(file);

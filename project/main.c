@@ -7,8 +7,9 @@ int main() {
         while (running == 1) {
             int selector, option;
 
-            system("cls");
+            system("cls"); //Limpeza do terminal
 
+            //Menu principal
             printf("Bem vindo ao sistema de cadastro de queijos e vinhos!\n\n");
 
             printf("-------------- MENU --------------\n");
@@ -42,12 +43,14 @@ int main() {
                 }
                 break;
 
+            //Case para encerrar o programa
             case 0:
                 printf("Saindo... volte sempre! :)\n");
                 sleep(2);
                 running = 0;
                 break;
 
+            //Case de opção inválida
             default:
                 printf("Opção inválida!");
                 sleep(2);

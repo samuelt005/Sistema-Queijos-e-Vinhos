@@ -1,9 +1,11 @@
+//Arquivo Header com todas as bibliotecas utilizadas globalmente
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <locale.h>
 #include <conio.h>
 #include <time.h>
+//Definição e criação da biblioteca GLOBAL.H
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
@@ -20,7 +22,7 @@ typedef struct {
     int year;
 } productStruct;
 
-//Seletor padrão de queijos ou vinhos
+//Seletor padrão de queijos ou vinhos utilizado em vários momentos
 int generalSelector () {
     int subSelector;
     printf("-------------- MENU --------------\n");

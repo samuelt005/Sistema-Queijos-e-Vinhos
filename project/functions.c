@@ -1,5 +1,6 @@
 #include "global.h"
 
+//Função para deleter produtos
 void deleteProduct(int productType) {
     FILE* file;
     char filename[20];
@@ -45,6 +46,7 @@ void deleteProduct(int productType) {
     sleep(2);
 }
 
+//Função para editar produtos
 void editProduct(int productType) {
     FILE* file;
     char filename[20];
@@ -131,6 +133,7 @@ void editProduct(int productType) {
     }
 }
 
+//Função para detectar lotes duplicados de produtos
 int checkDuplicateLot(int productType, int lotToCheck) {
     FILE* file;
     char filename[20];
@@ -162,6 +165,7 @@ int checkDuplicateLot(int productType, int lotToCheck) {
     return 0; // O número de lote não existe, não é um lote duplicado
 }
 
+//Função para registrar produtos
 void registerProduct (int productType) {
 
     productStruct newProduct;
@@ -215,6 +219,7 @@ void registerProduct (int productType) {
 
 }
 
+//Função para calcular tempo desde o cadastro do produto
 void calculateElapsedTime(productStruct product) {
     time_t currentTime;
     time(&currentTime);
@@ -241,6 +246,7 @@ void calculateElapsedTime(productStruct product) {
     printf("%d anos, %d meses, %d dias\n", elapsedYears, elapsedMonths, elapsedDays);
 }
 
+//Função para listar produtos
 void listProduct (int productType) {
     FILE* file;
 
